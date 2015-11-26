@@ -1,0 +1,20 @@
+<?php
+	class insert extends CI_Controller
+	{
+		function __construct()
+		{
+			parent::__construct();
+		}
+		
+		function index()
+		{
+			$this->load->database();
+			$this->load->model('Insert_model');
+			$this->Insert_model->login('edc','123','4');
+			/*$this->Insert_model->login('naps','123','2');
+			$this->Insert_model->login('litsoc','123','3');*/
+		}
+	}
+?>
+			
+			

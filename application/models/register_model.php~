@@ -1,0 +1,50 @@
+<?php
+class Register_model extends CI_Model {
+
+private $username;
+private $id;
+        public function __construct()
+        {
+                parent:: __construct();
+				$this->load->library('session');
+        }
+		
+		public function insert()
+		{
+		 if($this->session->userdata('logged_in'))
+				{
+			$this->load->library('session');
+					 $session_data = $this->session->userdata('logged_in');
+					 $username= $session_data['username'];
+					 $id= $this->session->userdata('id');
+					 
+					 	$data = array(
+					'club_id' => $username,
+					'eventName' => $this->input->post('eventName'),
+					'venue' => $this->input->post('venue'),
+					'startDate' => $this->input->post('startDate'),
+						'startTime1' => $this->input->post('startTime1'),
+					'endTime1' => $this->input->post('endTime1'),
+					'endDate' => $this->input->post('endDate'),
+					'startTime' => $this->input->post('startTime'),
+					'endTime' => $this->input->post('endTime'),
+					'video' => $this->input->post('video'),
+						'payment' => $this->input->post('payment'),
+					'contactName' => $this->input->post('contactName'),
+					'number' => $this->input->post('number'),
+					'email'=>$this->input->post('email')
+					);
+
+					return $this->db->insert('coverage1', $data);
+				}
+			  else
+			   {
+				 //If no session, redirect to login page
+				 redirect('login', 'refresh');
+			   }
+			$this->load->helper('url');
+
+
+		
+		}
+}
